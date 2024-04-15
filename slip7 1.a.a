@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Email Validation</title>
+</head>
+<body>
+    <h2>Email Validation</h2>
+    <form action="validateEmail.jsp" method="post">
+        Enter Email: <input type="text" name="email">
+        <input type="submit" value="Validate">
+    </form>
+    <% 
+    String email = request.getParameter("email");
+    if(email != null && !email.isEmpty()) {
+        if(email.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
+            out.println("<p style='color:green;'>Valid Email Address!</p>");
+        } else {
+            out.println("<p style='color:red;'>Invalid Email Address!</p>");
+        }
+    }
+    %>
+</body>
+</html>

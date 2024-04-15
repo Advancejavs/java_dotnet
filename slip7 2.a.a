@@ -1,0 +1,91 @@
+Imports System.Data.SqlClient
+Imports System.Web.UI.WebControls
+
+Public Class Form1
+
+    Dim connectionString As String = "Data Source=YourServerName;Initial Catalog=YourDatabaseName;Integrated Security=True"
+    Dim connection As New SqlConnection(connectionString)
+
+    Private Sub CreateStudentTable()
+        Try
+            connection.Open()
+            Dim query As String = "CREATE TABLE student (RollNo INT, SName NVARCHAR(50), Class NVARCHAR(50), City NVARCHAR(50))"
+            Dim command As New SqlCommand(query, connection)
+            command.ExecuteNonQuery()
+            MessageBox.Show("Student table created successfully.")
+        Catch ex As Exception
+            MessageBox.Show("Error creating student table: " & ex.Message)
+        Finally
+            If connection.State = ConnectionState.Open Then
+                connection.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub InsertRecords()
+        Try
+            connection.Open()
+            Dim query As String = "INSERT INTO student VALUES (@RollNo, @SName, @Class, @City)"
+            Dim command As New SqlCommand(query, connection)
+
+            ' Inserting 5 records
+            For i As Integer = 1 To 5
+                command.Parameters.Clear()
+                command.Parameters.AddWithValue("@RollNo", i)
+                command.Parameters.AddWithValue("@SName", "Student" & i)
+                command.Parameters.AddWithValue("@Class", "Class" & i)
+                command.Parameters.AddWithValue("@City", "Mumbai")
+                command.ExecuteNonQuery()
+            Next
+
+            MessageBox.Show("Records inserted successfully.")
+        Catch ex As Exception
+            MessageBox.Show("Error inserting records: " & ex.Message)
+        Finally
+            If connection.State = ConnectionState.Open Then
+                connection.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub UpdateRecords()
+        Try
+            connection.Open()
+            Dim query As String = "UPDATE student SET City = 'Pune' WHERE City = 'Mumbai'"
+            Dim command As New SqlCommand(query, connection)
+            command.ExecuteNonQuery()
+            MessageBox.Show("Records updated successfully.")
+        Catch ex As Exception
+            MessageBox.Show("Error updating records: " & ex.Message)
+        Finally
+            If connection.State = ConnectionState.Open Then
+                connection.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub DisplayRecords()
+        Try
+            connection.Open()
+            Dim query As String = "SELECT * FROM student"
+            Dim adapter As New SqlDataAdapter(query, connection)
+            Dim table As New Data.DataTable()
+            adapter.Fill(table)
+            GridView1.DataSource = table
+            GridView1.DataBind()
+        Catch ex As Exception
+            MessageBox.Show("Error displaying records: " & ex.Message)
+        Finally
+            If connection.State = ConnectionState.Open Then
+                connection.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        CreateStudentTable()
+        InsertRecords()
+        UpdateRecords()
+        DisplayRecords()
+    End Sub
+End Class
