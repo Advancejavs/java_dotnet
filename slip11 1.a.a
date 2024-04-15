@@ -1,0 +1,22 @@
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+public class ClientInfo {
+    public static void main(String[] args) {
+        try {
+            // Get the InetAddress object representing the local host
+            InetAddress localHost = InetAddress.getLocalHost();
+
+            // Get the IP address and host name of the local machine
+            String ipAddress = localHost.getHostAddress();
+            String hostName = localHost.getHostName();
+
+            // Display the IP address and host name
+            System.out.println("IP Address: " + ipAddress);
+            System.out.println("Host Name: " + hostName);
+        } catch (UnknownHostException e) {
+            System.out.println("Error: Unable to retrieve client information.");
+            e.printStackTrace();
+        }
+    }
+}
