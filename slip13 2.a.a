@@ -1,0 +1,17 @@
+Public Class Form1
+Private Sub Button1_Click
+(ByVal sender As System.Object, ByVal e As System.EventArgs)
+Handles Button1.Click
+Timer1.Enabled = True
+End Sub
+Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs)
+Handles Timer1.Tick
+If PictureBox1.Visible = True Then
+PictureBox1.Visible = False
+End If
+If PictureBox1.Visible = False Then
+PictureBox1.Visible = True
+End If
+End Sub
+End Class
+

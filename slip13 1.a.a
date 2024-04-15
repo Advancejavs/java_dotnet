@@ -1,0 +1,19 @@
+class MyRunnable implements Runnable {
+    public void run() {
+        // Get the name of the currently executing thread
+        String threadName = Thread.currentThread().getName();
+        System.out.println("Currently executing thread: " + threadName);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Create a new thread and start it
+        Thread thread = new Thread(new MyRunnable());
+        thread.start();
+        
+        // Get the name of the main thread
+        String mainThreadName = Thread.currentThread().getName();
+        System.out.println("Main thread: " + mainThreadName);
+    }
+}
