@@ -1,0 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login Result</title>
+</head>
+<body>
+
+<%
+    // Retrieve username and password from request parameters
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
+    
+    // Check if username and password are the same
+    if (username != null && password != null && username.equals(password)) {
+%>
+    <%
+        // If username and password are the same, redirect to Login.html with success message
+        response.sendRedirect("Login.html?message=Login+Successfully");
+    %>
+<%
+    } else {
+%>
+    <%
+        // If username and password are different, redirect to Error.html with error message
+        response.sendRedirect("Error.html?message=Login+Failed");
+    %>
+<%
+    }
+%>
+
+</body>
+</html>
