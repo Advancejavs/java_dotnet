@@ -1,0 +1,36 @@
+Public Class VowelCheck
+Private Sub btnvowel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+Handles btnvowel.Click
+Dim c As Char
+c = txtchar.Text
+If Char.IsUpper(c) Then
+MsgBox("Upper Case Character")
+ElseIf Char.IsLower(c) Then
+MsgBox("Lower Case Character")
+End If
+Select Case c
+Case "A"
+MsgBox("Vowel")
+Case "B"
+MsgBox("Vowel")
+Case "C"
+MsgBox("Vowel")
+Case "D"
+MsgBox("Vowel")
+Case "E"
+MsgBox("Vowel")
+Case "a"
+MsgBox("Vowel")
+Case "b"
+MsgBox("Vowel")
+Case "c"
+MsgBox("Vowel")
+Case "d"
+MsgBox("Vowel")
+Case "e"
+MsgBox("Vowel")
+Case Else
+MsgBox("Not Vowel")
+End Select
+End Sub
+End Class
