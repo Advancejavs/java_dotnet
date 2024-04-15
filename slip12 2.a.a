@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Button Color Change</title>
+    <style>
+        /* Define styles for the button */
+        .green-button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer; /* Set cursor to pointer to indicate it's clickable */
+        }
+
+        /* Define styles for when the mouse is over the button */
+        .green-button:hover {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <!-- Use a button with CSS class green-button -->
+            <asp:Button ID="btnChangeColor" runat="server" Text="Change Color" CssClass="green-button" />
+        </div>
+    </form>
+</body>
+</html>
