@@ -1,0 +1,17 @@
+  1) Write a VB.Net Program to display the numbers continuously in TextBox by clicking onButton.
+
+
+Public Class Form1 
+Dim counterAs Integer 
+ Private Sub Form1_Load(ByVal senderAs System.Object,ByVal eAs 
+System.EventArgs)Handles MyBase.Load
+counter = 0
+Timer1.Enabled =True 
+End Sub 
+
+Private Sub Timer1_Tick(ByVal senderAs System.Object,ByVal eAs
+ System.EventArgs)Handles Timer1.Tick
+counter = counter + 1
+TextBox1.Text = counter
+End Sub 
+End Clas
