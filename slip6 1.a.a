@@ -1,0 +1,44 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class BlinkingImage extends JFrame {
+
+    private JLabel imageLabel;
+    private ImageIcon imageIcon;
+    private Timer timer;
+    private boolean isVisible = true;
+
+    public BlinkingImage() {
+        setTitle("Blinking Image");
+        setSize(400, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        // Load an image
+        imageIcon = new ImageIcon("image_path_here.jpg"); // Replace "image_path_here.jpg" with the path to your image file
+
+        // Create label for the image
+        imageLabel = new JLabel(imageIcon);
+        add(imageLabel, BorderLayout.CENTER);
+
+        // Create and start timer to toggle image visibility
+        timer = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                isVisible = !isVisible;
+                imageLabel.setVisible(isVisible);
+            }
+        });
+        timer.start();
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new BlinkingImage().setVisible(true);
+            }
+        });
+    }
+}
