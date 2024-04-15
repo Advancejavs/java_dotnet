@@ -1,0 +1,8 @@
+Public Class EmpProf
+Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+Handles Button1.Click
+txtnetsal.Text = Val(txtsalary.Text) + (Val(txtda.Text) + Val(txthra.Text) - Val(txtit.Text) +
+Val(txtma.Text) + Val(txtpf.Text) - Val(txtpt.Text))
+MsgBox(txtname.Text + " " + txtnetsal.Text)
+End Sub
+End Class
