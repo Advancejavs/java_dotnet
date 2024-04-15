@@ -1,0 +1,10 @@
+9) Write a C#.Net application to display the vowels from a given 
+String.string vowels = "aeiou";
+string str = textBox1.Text;
+char[] ch = str.ToCharArray();
+foreach (char c in ch)
+{
+if (vowels.Contains(c.ToString()))
+{
+Response.Write("vowels :-" + c.ToString() + "<br/>"); }else {Response.Write("consonant :- " + c.ToString() + "<br/>"); //consonant
+} }
