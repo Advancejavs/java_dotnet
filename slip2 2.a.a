@@ -1,0 +1,13 @@
+Public Class MoveText
+Private Sub MoveText_Load(ByVal sender As System.Object, ByVal e As
+System.EventArgs) Handles MyBase.Load
+Timer1.Enabled = True
+End Sub
+
+Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As
+System.EventArgs) Handles Timer1.Tick
+Label1.Left += 1
+If Label1.Left >= 12000 Then
+Timer1.Enabled = FalseEnd If
+End Sub
+End Clas
