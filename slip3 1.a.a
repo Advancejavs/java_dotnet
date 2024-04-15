@@ -1,0 +1,68 @@
+sever code
+import java.io.*;
+import java.net.*;
+
+public class PrimeServer {
+    public static void main(String[] args) {
+        try {
+            ServerSocket serverSocket = new ServerSocket(12345);
+            System.out.println("Server started. Waiting for client...");
+
+            Socket clientSocket = serverSocket.accept();
+            System.out.println("Client connected.");
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                int number = Integer.parseInt(inputLine);
+                boolean isPrime = checkPrime(number);
+                out.println(isPrime ? "Prime" : "Not Prime");
+            }
+
+            clientSocket.close();
+            serverSocket.close();
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private static boolean checkPrime(int number) {
+        if (number <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(number); i++) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+client code
+import java.io.*;
+import java.net.*;
+
+public class PrimeClient {
+    public static void main(String[] args) {
+        try {
+            Socket socket = new Socket("localhost", 12345);
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            System.out.print("Enter a number: ");
+            String numberStr = reader.readLine();
+            
+            out.println(numberStr);
+            String response = in.readLine();
+            System.out.println("Result: " + response);
+            
+            socket.close();
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
