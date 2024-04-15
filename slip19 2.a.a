@@ -1,0 +1,42 @@
+Module Module1
+    Sub Main()
+        Dim inputString As String
+
+        ' Accept input string from user
+        Console.WriteLine("Enter a string:")
+        inputString = Console.ReadLine()
+
+        ' Check if the input string is palindrome
+        If IsPalindrome(inputString) Then
+            Console.WriteLine("The string is a palindrome.")
+        Else
+            Console.WriteLine("The string is not a palindrome.")
+        End If
+
+        Console.ReadLine()
+    End Sub
+
+    Function IsPalindrome(ByVal str As String) As Boolean
+        ' Remove spaces and convert to lowercase for case-insensitive comparison
+        str = str.Replace(" ", "").ToLower()
+
+        ' Initialize pointers for comparing characters
+        Dim i As Integer = 0
+        Dim j As Integer = str.Length - 1
+
+        ' Compare characters from start and end of the string
+        While i < j
+            ' If characters at current positions are not equal, the string is not a palindrome
+            If str(i) <> str(j) Then
+                Return False
+            End If
+
+            ' Move pointers towards the center of the string
+            i += 1
+            j -= 1
+        End While
+
+        ' If the loop completes without returning False, the string is a palindrome
+        Return True
+    End Function
+End Module

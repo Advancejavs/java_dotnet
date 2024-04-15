@@ -1,0 +1,81 @@
+import java.sql.*;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class DisplayFirstRecord extends JFrame implements ActionListener {
+    // JDBC URL, username, and password
+    static final String JDBC_URL = "jdbc:mysql://localhost:3306/your_database_name";
+    static final String USER = "your_username";
+    static final String PASSWORD = "your_password";
+
+    Connection connection;
+    JTextField rnoTextField, snameTextField, perTextField;
+    JButton displayButton;
+
+    public DisplayFirstRecord() {
+        super("Display First Record");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Create GUI components
+        rnoTextField = new JTextField(10);
+        snameTextField = new JTextField(10);
+        perTextField = new JTextField(10);
+        displayButton = new JButton("Display First Record");
+
+        // Add action listener to the button
+        displayButton.addActionListener(this);
+
+        // Add components to the frame
+        JPanel panel = new JPanel(new GridLayout(4, 2));
+        panel.add(new JLabel("Roll No:"));
+        panel.add(rnoTextField);
+        panel.add(new JLabel("Student Name:"));
+        panel.add(snameTextField);
+        panel.add(new JLabel("Percentage:"));
+        panel.add(perTextField);
+        panel.add(displayButton);
+
+        add(panel);
+
+        // Connect to the database
+        try {
+            connection = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Failed to connect to the database: " + e.getMessage());
+            System.exit(1);
+        }
+
+        setSize(300, 200);
+        setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        try {
+            // Create statement
+            Statement statement = connection.createStatement();
+
+            // Execute query to retrieve the first record from the student table
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM student LIMIT 1");
+
+            // Display the first record onto the TextFields
+            if (resultSet.next()) {
+                rnoTextField.setText(resultSet.getString("rno"));
+                snameTextField.setText(resultSet.getString("sname"));
+                perTextField.setText(resultSet.getString("per"));
+            } else {
+                JOptionPane.showMessageDialog(this, "No records found in the student table.");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Failed to execute query: " + ex.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new DisplayFirstRecord());
+    }
+}
