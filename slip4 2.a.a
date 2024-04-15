@@ -1,0 +1,16 @@
+Public Class Form1
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Set initial date for the DateTimePicker control
+        dateTimePicker1.Value = DateTime.Today
+    End Sub
+
+    Private Sub dateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles dateTimePicker1.ValueChanged
+        ' Get the selected date from the DateTimePicker control
+        Dim selectedDate As DateTime = dateTimePicker1.Value
+
+        ' Display day, month, and year in separate TextBox controls
+        txtDay.Text = selectedDate.Day.ToString()
+        txtMonth.Text = selectedDate.Month.ToString()
+        txtYear.Text = selectedDate.Year.ToString()
+    End Sub
+End Class
